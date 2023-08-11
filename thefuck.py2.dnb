@@ -66,7 +66,7 @@ find -type f -executable -exec sed -i '1s=^#!/usr/bin/\(python\|env python\)[23]
 %license LICENSE.md
 
 %changelog
-* Sun Jun 02 2019 Casjays Developments <rpm-devel@casjaysdev.com> - 3.15-6
+* Sun Jun 02 2019 Casjays Developments <rpm-devel@casjaysdev.pro> - 3.15-6
 - Fixes for RHEL 8 and fedora
 
 * Sat Jul 14 2018 Fedora Release Engineering <releng@fedoraproject.org> - 3.15-5
