@@ -1,42 +1,26 @@
 %global debug_package %{nil}
 
 Name: thefuck
-Version: 3.15
-Release: 6%{?dist}
+Version: 3.32
+Release: 1%{?dist}
 Summary: App that corrects your previous console command
 License: MIT
 URL: https://github.com/nvbn/thefuck
 Source0: https://github.com/nvbn/%{name}/archive/%{version}.tar.gz
 
-%if 0%{?rhel} && 0%{?rhel} <= 7
-BuildRequires: python34-devel
-BuildRequires: python34-setuptools
-BuildRequires: python34-psutil
-BuildRequires: python34-pip
-BuildRequires: python34-six
-BuildRequires: python3-decorator
-BuildRequires: python34-pytest
-BuildRequires: python34-mock
-BuildRequires: python3-colorama
-Requires: python34
-Requires: python3-psutil
-Requires: python34-six
-Requires: python3-colorama
-%else
-BuildRequires: python3-devel
-BuildRequires: python3-setuptools
-BuildRequires: python3-psutil
-BuildRequires: python3-pip
-BuildRequires: python3-six
-BuildRequires: python3-decorator
-BuildRequires: python3-pytest
-BuildRequires: python3-mock
-BuildRequires: python3-colorama
+BuildRequires: python%{python3_pkgversion}-devel
+BuildRequires: python%{python3_pkgversion}-setuptools
+BuildRequires: python%{python3_pkgversion}-psutil
+BuildRequires: python%{python3_pkgversion}-pip
+BuildRequires: python%{python3_pkgversion}-six
+BuildRequires: python%{python3_pkgversion}-decorator
+BuildRequires: python%{python3_pkgversion}-pytest
+BuildRequires: python%{python3_pkgversion}-mock
+BuildRequires: python%{python3_pkgversion}-colorama
 Requires: python3
-Requires: python3-psutil
-Requires: python3-six
-Requires: python3-colorama
-%endif
+Requires: python%{python3_pkgversion}-psutil
+Requires: python%{python3_pkgversion}-six
+Requires: python%{python3_pkgversion}-colorama
 
 %description
 This application corrects your previous console command.
@@ -65,6 +49,12 @@ find -type f -executable -exec sed -i '1s=^#!/usr/bin/\(python\|env python\)[23]
 %license LICENSE.md
 
 %changelog
+* Fri Apr 24 2026 CasjaysDev <rpm-devel@casjaysdev.pro> - 3.32-1
+- Update to 3.32
+
+* Fri Apr 24 2026 CasjaysDev <rpm-devel@casjaysdev.pro> - 3.15-7
+- Modernize for AlmaLinux 10: drop RHEL7 conditionals, python3 only
+
 * Sun Jun 02 2019 Casjays Developments <rpm-devel@casjaysdev.pro> - 3.15-6
 - Fixes for RHEL 8 and fedora
 
