@@ -38,7 +38,7 @@ find -type f -executable -exec sed -i '1s=^#!/usr/bin/\(python\|env python\)[23]
 %{__python3} setup.py build
 
 %install
-%{__python3} setup.py install --skip-build --root $RPM_BUILD_ROOT
+%{__python3} setup.py install --skip-build --root %{buildroot}
 
 %files
 %{_bindir}/thefuck
@@ -49,6 +49,9 @@ find -type f -executable -exec sed -i '1s=^#!/usr/bin/\(python\|env python\)[23]
 %license LICENSE.md
 
 %changelog
+* Fri May 22 2026 CasjaysDev <rpm-devel@casjaysdev.pro> - 3.32-1
+- Fix spec violations: use %{buildroot}, %global for constants
+
 * Fri Apr 24 2026 CasjaysDev <rpm-devel@casjaysdev.pro> - 3.32-1
 - Update to 3.32
 
