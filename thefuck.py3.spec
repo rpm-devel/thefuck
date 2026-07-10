@@ -6,6 +6,7 @@ Release: 1%{?dist}
 Summary: App that corrects your previous console command
 License: MIT
 URL: https://github.com/nvbn/thefuck
+ExclusiveArch: x86_64 aarch64
 Source0: https://github.com/nvbn/%{name}/archive/%{version}.tar.gz
 
 BuildRequires: python%{python3_pkgversion}-devel
@@ -30,7 +31,7 @@ alias FUCK='fuck'
 For other shells please check /usr/share/doc/thefuck/README.md
 
 %prep
-%setup -q
+%autosetup -p1
 sed -i -e '/^#!\//, 1d' *.py
 find -type f -executable -exec sed -i '1s=^#!/usr/bin/\(python\|env python\)[23]\?=#!%{__python3}=' {} +
 
@@ -49,6 +50,13 @@ find -type f -executable -exec sed -i '1s=^#!/usr/bin/\(python\|env python\)[23]
 %license LICENSE.md
 
 %changelog
+* Sat Jul 05 2026 CasjaysDev <rpm-devel@casjaysdev.pro> - 3.32-1
+- Verified 3.32 is latest upstream release; project dead since 2022
+- Verified Source0 downloadable
+
+* Thu Jul 03 2026 CasjaysDev <rpm-devel@casjaysdev.pro> - 3.32-1
+- Add ExclusiveArch: x86_64 aarch64; %%autosetup -p1
+
 * Fri May 22 2026 CasjaysDev <rpm-devel@casjaysdev.pro> - 3.32-1
 - Fix spec violations: use %{buildroot}, %global for constants
 
