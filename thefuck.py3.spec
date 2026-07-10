@@ -9,6 +9,12 @@ URL: https://github.com/nvbn/thefuck
 ExclusiveArch: x86_64 aarch64
 Source0: https://github.com/nvbn/%{name}/archive/%{version}.tar.gz
 
+%if 0%{?suse_version}
+%global python3_mock_pkg python-mock
+%else
+%global python3_mock_pkg python%{python3_pkgversion}-mock
+%endif
+
 BuildRequires: python%{python3_pkgversion}-devel
 BuildRequires: python%{python3_pkgversion}-setuptools
 BuildRequires: python%{python3_pkgversion}-psutil
@@ -16,7 +22,7 @@ BuildRequires: python%{python3_pkgversion}-pip
 BuildRequires: python%{python3_pkgversion}-six
 BuildRequires: python%{python3_pkgversion}-decorator
 BuildRequires: python%{python3_pkgversion}-pytest
-BuildRequires: python%{python3_pkgversion}-mock
+BuildRequires: %{python3_mock_pkg}
 BuildRequires: python%{python3_pkgversion}-colorama
 Requires: python3
 Requires: python%{python3_pkgversion}-psutil
@@ -50,6 +56,14 @@ find -type f -executable -exec sed -i '1s=^#!/usr/bin/\(python\|env python\)[23]
 %license LICENSE.md
 
 %changelog
+* Sat Jul 05 2026 CasjaysDev <rpm-devel@casjaysdev.pro> - 3.32-1
+- Multi-distro pass: guard python3-mock BuildRequires for openSUSE/SLES,
+  which packages it as python-mock (no python3- prefix, no official
+  python3-mock exists); verified via software.opensuse.org. All other
+  python3-* BuildRequires/Requires confirmed identical on openSUSE
+  (python3-devel, -setuptools, -psutil, -pip, -six, -decorator, -pytest,
+  -colorama); ExclusiveArch already correct, no noarch used
+
 * Sat Jul 05 2026 CasjaysDev <rpm-devel@casjaysdev.pro> - 3.32-1
 - Verified 3.32 is latest upstream release; project dead since 2022
 - Verified Source0 downloadable
